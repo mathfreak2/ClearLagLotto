@@ -1,0 +1,13 @@
+main: cat.math.clearlaglotto.ClearLagLotto
+name: ClearLagLotto
+version: 1.0
+author: Rowan McKee, PlumpFeline
+
+depend: [ClearLag, Vault, EssentialsX]
+
+commands:
+   clearlaglotto:
+   cll:
+   guess:
+   bet:
+   predict:
