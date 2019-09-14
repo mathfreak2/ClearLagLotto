@@ -3,11 +3,47 @@ name: ClearLagLotto
 version: 1.0
 author: Rowan McKee, PlumpFeline
 
-depend: [ClearLag, Vault, EssentialsX]
+depend: [Vault, Essentials, ClearLag]
 
 commands:
-   clearlaglotto:
-   cll:
-   guess:
    bet:
-   predict:
+      description: Guess the number of entities ClearLag removes!
+      usage: /bet [number]
+      aliases: [guess, predict]
+      permission: clearlaglotto.bet
+      permission-message: You do not have permission to guess a number.
+      
+   clearlaglotto:
+      description: Gives information about the current state of the plugin.
+      usage: /clearlaglotto [args]
+      aliases: cll
+      permission: clearlaglotto.cll
+      permission-message: You don't have permission.
+      
+   pot:
+      description: Gives the amount of money currently in the pot
+      usage: /pot
+      permission: clearlaglotto.pot
+      permission-message: You do not have permission to view amount in the pot.   
+      
+permissions:
+   clearlaglotto.*:
+      description: gives access to all clearlaglotto commands
+      default: op
+      children:
+         clearlaglotto.bet: true
+         clearlaglotto.cll: true
+         clearlaglotto.pot: true
+         
+   clearlaglotto.bet:
+      description: Allows a user to guess a number for the ClearLag removal
+      default: true
+      
+   clearlaglotto.pot:
+      description: Allows a user to view how much money is in the pot
+      default: true
+      
+   clearlaglotto.cll:
+      description: Allows a user to modify or get information in the configuration of this plugin
+      default: op         
+      
