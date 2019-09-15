@@ -1,0 +1,73 @@
+# winning conditions are either 'blackjack', 'absolute', or 'exact'
+
+# blackjack determines the winner by finding the closest guess
+# that did not go over the answer
+
+# absolute determines the winner by finding the closest guess
+# on either side of the answer
+
+# if the winning condition is 'exact', then it will only register
+# winners when a guess matches the number given exactly
+
+winning-condition: 'absolute'
+
+# frequency can either be randomized or after a certain number of iterations
+# set this value to true to be randomized or false to be predetermined
+
+randomize-frequency: true
+
+# Sets whether or not to show a warning if the activation chance is 0
+
+zero-activation-warning: true
+
+# This section only applies if the frequency is randomized
+
+# This value should be set between 0 and 100 inclusive
+# 100 will cause the lotto to activate every time there is a clearlag
+# 0 indicates that it will never activate
+
+activation-chance: 1
+
+# End section for randomized frequency
+
+# This section only applies if the frequency is predetermined
+
+# Determines the X value in activating every x number of clearlags
+# The number 0 should be used to make the activation never happen
+
+iterations-to-activate: 1
+
+# End section for predetermined frequency
+
+# Cost per entry
+
+entry-cost: 100
+
+# Entry success message to show the player after they enter in the lottery
+
+entry-confirm: '&aYou have entered a guess into the lottery!'
+
+# Entry failure message to show the player if they don't have enough money
+
+entry-no-money: '&cYou do not have enough money.'
+
+# Multiplies the entry cost by this number to determine how much gets added to the pot
+
+pot-multiplier: 1
+
+# Adds the entry cost to this number to determine how much gets added to the pot
+
+pot-adder: 0
+
+# If the player gets an exact match to the number of removed entities, multiply their winnings
+# by this number to determine how much money they get for winning
+
+jackpot-multiplier: 3
+
+# How many seconds before the clearlag removes entities should the lottery activate?
+
+time-before-clearlag: 60
+
+# What message should be displayed when the betting can begin?
+
+start-lotto: '&aMay the guessing begin! &cType &e/bet [amount] &cto enter in a guess for the number of entities removed!'
