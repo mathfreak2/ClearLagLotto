@@ -22,8 +22,8 @@ zero-activation-warning: true
 
 # This section only applies if the frequency is randomized
 
-# This value should be set between 0 and 100 inclusive
-# 100 will cause the lotto to activate every time there is a clearlag
+# This value should be set between 0 and 1 inclusive
+# 1 will cause the lotto to activate every time there is a clearlag
 # 0 indicates that it will never activate
 
 activation-chance: 1
@@ -39,7 +39,7 @@ iterations-to-activate: 1
 
 # End section for predetermined frequency
 
-# Cost per entry
+# Cost per entry, this number can be decimal if so desired
 
 entry-cost: 100
 
@@ -52,21 +52,24 @@ entry-confirm: '&aYou have entered a guess into the lottery!'
 entry-no-money: '&cYou do not have enough money.'
 
 # Multiplies the entry cost by this number to determine how much gets added to the pot
+# This number may be decimal
 
 pot-multiplier: 1
 
 # Adds the entry cost to this number to determine how much gets added to the pot
+# This number may be decimal
 
 pot-adder: 0
 
 # If the player gets an exact match to the number of removed entities, multiply their winnings
 # by this number to determine how much money they get for winning
+# This number may be decimal
 
 jackpot-multiplier: 3
 
 # How many seconds before the clearlag removes entities should the lottery activate?
 
-time-before-clearlag: 60
+seconds-before-clearlag: 60
 
 # What message should be displayed when the betting can begin?
 
