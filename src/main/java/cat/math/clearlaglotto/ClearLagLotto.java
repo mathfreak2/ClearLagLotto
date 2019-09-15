@@ -3,10 +3,12 @@ package cat.math.clearlaglotto;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -36,10 +38,16 @@ public class ClearLagLotto extends JavaPlugin {
 	private int seconds_before_clearlag;
 	private String start_lotto;
 	
+	// Values for the list of entries and how much is in the pot
+	private ArrayList<Entry> entries = new ArrayList<Entry>();
+	private double pot;
+	
+	// Gives access to the associated plugins this one is dependent on
 	public Plugin getVault() {return vault;}
 	public Plugin getClearLag() {return clearlag;}
 	public Plugin getEssentials() {return essentials;}
 	
+	// Getter methods for config related values
 	public String getWinningCondition() {return winning_condition;}
 	public String getEntryConfirmMessage() {return entry_confirm;}
 	public String getEntryNoMoneyMessage() {return entry_no_money;}
@@ -53,6 +61,7 @@ public class ClearLagLotto extends JavaPlugin {
 	public int getSecondsBeforeClearLag() {return seconds_before_clearlag;}
 	public boolean isRandomizingFrequency() {return randomize_frequency;}
 	
+	// Setter methods for config related values
 	public void setWinningCondition(String s) {winning_condition = s;}
 	public void setEntryConfirmMessage(String s) {entry_confirm = s;}
 	public void setEntryNoMoneyMessage(String s) {entry_no_money = s;}
@@ -65,6 +74,29 @@ public class ClearLagLotto extends JavaPlugin {
 	public void setIterationsToActivate(int i) {iterations_to_activate = i;}
 	public void setSecondsBeforeClearLag(int i) {seconds_before_clearlag = i;}
 	public void setRandomizingFrequency(boolean b) {randomize_frequency = b;}
+	
+	// Other getter methods
+	public ArrayList<Entry> getEntryList() {return entries;}
+	public double getPot() {return pot;}
+	
+	// Other setter methods
+	public void setPot(double d) {pot = d;}
+	
+	// Adder methods
+	public void addToPot(double d) {pot += d;}
+	public void addEntry(Entry entry) {
+		
+		OfflinePlayer player = entry.getPlayer();
+		
+		for(Entry e : entries) {
+			if(e.getPlayer().getName().equals(player.getName())) {
+				e.changeEntry(entry.getEntry());
+				return;
+			}
+		}
+		
+		entries.add(entry);
+	}
 	
 	@Override
 	public void onEnable() {
