@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
+import commands.bet;
+import commands.cll;
+import commands.pot;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -31,20 +34,20 @@ public class ClearLagLotto extends JavaPlugin {
 	private BeginLotto lotto;
 	
 	// Variables loaded in from the config.yml
-	private String winning_condition;
-	private boolean randomize_frequency;
-	private boolean zero_activation_warning;
-	private double activation_chance;
-	private int iterations_to_activate;
-	private double entry_cost;
-	private String entry_confirm;
-	private String entry_no_money;
-	private double pot_multiplier;
-	private double pot_adder;
-	private double jackpot_multiplier;
-	private int seconds_before_clearlag;
-	private String start_lotto;
-	private String no_lotto;
+	static private String winning_condition;
+	static private boolean randomize_frequency;
+	static private boolean zero_activation_warning;
+	static private double activation_chance;
+	static private int iterations_to_activate;
+	static private double entry_cost;
+	static private String entry_confirm;
+	static private String entry_no_money;
+	static private double pot_multiplier;
+	static private double pot_adder;
+	static private double jackpot_multiplier;
+	static private int seconds_before_clearlag;
+	static private String start_lotto;
+	static private String no_lotto;
 	
 	// Gives access to the associated plugins this one is dependent on
 	public Plugin getVault() {return vault;}
@@ -52,19 +55,19 @@ public class ClearLagLotto extends JavaPlugin {
 	public Plugin getEssentials() {return essentials;}
 	
 	// Getter methods for config related values
-	public String getWinningCondition() {return winning_condition;}
-	public String getEntryConfirmMessage() {return entry_confirm;}
-	public String getEntryNoMoneyMessage() {return entry_no_money;}
-	public String getStartLottoMessage() {return start_lotto;}
-	public String getNoLottoMessage() {return no_lotto;}
-	public double getActivationChance() {return activation_chance;}
-	public double getEntryCost() {return entry_cost;}
-	public double getPotMultiplier() {return pot_multiplier;}
-	public double getPotAdder() {return pot_adder;}
-	public double getJackpotMultiplier() {return jackpot_multiplier;}
-	public int getIterationsToActivate() {return iterations_to_activate;}
-	public int getSecondsBeforeClearLag() {return seconds_before_clearlag;}
-	public boolean isRandomizingFrequency() {return randomize_frequency;}
+	static public String getWinningCondition() {return winning_condition;}
+	static public String getEntryConfirmMessage() {return entry_confirm;}
+	static public String getEntryNoMoneyMessage() {return entry_no_money;}
+	static public String getStartLottoMessage() {return start_lotto;}
+	static public String getNoLottoMessage() {return no_lotto;}
+	static public double getActivationChance() {return activation_chance;}
+	static public double getEntryCost() {return entry_cost;}
+	static public double getPotMultiplier() {return pot_multiplier;}
+	static public double getPotAdder() {return pot_adder;}
+	static public double getJackpotMultiplier() {return jackpot_multiplier;}
+	static public int getIterationsToActivate() {return iterations_to_activate;}
+	static public int getSecondsBeforeClearLag() {return seconds_before_clearlag;}
+	static public boolean isRandomizingFrequency() {return randomize_frequency;}
 	
 	// Setter methods for config related values
 	public void setWinningCondition(String s) {winning_condition = s;}
@@ -101,6 +104,11 @@ public class ClearLagLotto extends JavaPlugin {
 		clearlag = (Clearlag) cl;
 		vault = (Vault) v;
 		essentials = (Essentials) e;
+
+		getCommand("pot").setExecutor(new pot());
+		getCommand("clearlaglotto").setExecutor(new cll());
+		getCommand("bet").setExecutor(new bet());
+
 		loadConfig();
 		registerEvents();
 	}
@@ -190,50 +198,6 @@ public class ClearLagLotto extends JavaPlugin {
 		
 		this.saveConfig();
 	}
-	
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		
-		if(cmd.getName().equalsIgnoreCase("bet")) {
-			
-			if(!BeginLotto.isRunning) {
-				sender.sendMessage(no_lotto);
-				return true;
-			}
-			
-			if(!(sender instanceof Player) || !sender.hasPermission("clearlaglotto.bet")) {
-				sender.sendMessage("There is a lottery currently in progress, but you may not participate!");
-				return true;
-			}
-			
-			OfflinePlayer player = (OfflinePlayer) sender;
-			
-			if(args.length == 0) return false;
-			int bet = stringToInt(args[0]);
-			if(bet < 0) return false;
-			
-			// Needs to create an entry and add it to the BeginLotto event
-		}
-		
-		return false;
-	}
-	
-	private int stringToInt(String s) {
-		
-		int result = 0;
-		try {
-			for(int i=0; i<s.length(); i++) {
-				double m = Character.getNumericValue(s.charAt(i));
-				double m1 = Math.pow(10, s.length()-i-1)*m;
-				if(!(m == 0 || m == 1 || m == 2 || m == 3 || m == 4 || m == 5 || m == 6 || m == 7 || m == 8 || m == 9))
-					return -1;
-				result += m1;
-			}
-		}
-		catch(Exception e) {
-			return -1;
-		}
-		
-		return result;
-	}
+
+
 }
