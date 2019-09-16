@@ -8,21 +8,21 @@ depend: [Vault, Essentials, ClearLag]
 commands:
    bet:
       description: Guess the number of entities ClearLag removes!
-      usage: §a/bet [number]
+      usage: /bet [number]
       aliases: [guess, predict]
       permission: clearlaglotto.bet
       permission-message: You do not have permission to guess a number.
       
    clearlaglotto:
       description: Gives information about the current state of the plugin.
-      usage: §a/clearlaglotto [args]
+      usage: /clearlaglotto [args]
       aliases: cll
       permission: clearlaglotto.cll
       permission-message: You don't have permission.
       
    pot:
       description: Gives the amount of money currently in the pot
-      usage: §a/pot
+      usage: /pot
       permission: clearlaglotto.pot
       permission-message: You do not have permission to view amount in the pot.   
       
