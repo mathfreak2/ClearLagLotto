@@ -11,33 +11,36 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class Bet implements TabExecutor {
-    @Override
+	
+	ClearLagLotto clearlaglotto;
+	
+	public Bet(ClearLagLotto clearlaglotto) {
+		this.clearlaglotto = clearlaglotto;
+	}
+	
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(command.getName().equalsIgnoreCase("bet")) {
 
-            if(!BeginLotto.isRunning) {
-                sender.sendMessage(ClearLagLotto.getWinningCondition());
-                return true;
-            }
-
-            if(!(sender instanceof Player) || !sender.hasPermission("clearlaglotto.bet")) {
-                sender.sendMessage("There is a lottery currently in progress, but you may not participate!");
-                return true;
-            }
-
-            OfflinePlayer player = (OfflinePlayer) sender;
-
-            if(args.length == 0) return false;
-            int bet = stringToInt(args[0]);
-            if(bet < 0) return false;
-
-            // Needs to create an entry and add it to the BeginLotto event
+        if(!BeginLotto.isRunning) {
+            sender.sendMessage(clearlaglotto.getWinningCondition());
+            return true;
         }
 
-        return false;
+        if(!(sender instanceof Player) || !sender.hasPermission("clearlaglotto.bet")) {
+            sender.sendMessage("There is a lottery currently in progress, but you may not participate!");
+            return true;
+        }
+
+        OfflinePlayer player = (OfflinePlayer) sender;
+
+        if(args.length == 0) return false;
+        int bet = stringToInt(args[0]);
+        if(bet < 0) return false;
+
+        // Needs to create an entry and add it to the BeginLotto event
+
+        return true;
     }
 
-    @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         return null;
     }
@@ -60,4 +63,5 @@ public class Bet implements TabExecutor {
 
         return result;
     }
+
 }
