@@ -1,4 +1,4 @@
-package commands;
+package cat.math.clearlaglotto.commands;
 
 import cat.math.clearlaglotto.ClearLagLotto;
 import cat.math.clearlaglotto.events.BeginLotto;
@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class bet implements TabExecutor {
+public class Bet implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(command.getName().equalsIgnoreCase("bet")) {
