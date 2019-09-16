@@ -8,7 +8,7 @@ public class Entry {
 	private int entry;
 	private long entry_time;
 	
-	Entry(OfflinePlayer player, int entry) {
+	public Entry(OfflinePlayer player, int entry) {
 		
 		this.player = player;
 		this.entry = entry;

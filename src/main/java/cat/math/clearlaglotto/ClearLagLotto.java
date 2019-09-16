@@ -6,9 +6,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import commands.bet;
-import commands.cll;
-import commands.pot;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -21,6 +18,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import cat.math.clearlaglotto.events.BeginLotto;
+import cat.math.clearlaglotto.listeners.ClearLagListener;
 import me.minebuilders.clearlag.*;
 import net.milkbowl.vault.*;
 import com.earth2me.essentials.*;
@@ -32,42 +30,50 @@ public class ClearLagLotto extends JavaPlugin {
 	private Essentials essentials;
 	
 	private BeginLotto lotto;
+	private long start_time;
+	
+	// This variable is only relevant if this plugin is NOT randomizing frequency
+	private int iteration = 1;
 	
 	// Variables loaded in from the config.yml
-	static private String winning_condition;
-	static private boolean randomize_frequency;
-	static private boolean zero_activation_warning;
-	static private double activation_chance;
-	static private int iterations_to_activate;
-	static private double entry_cost;
-	static private String entry_confirm;
-	static private String entry_no_money;
-	static private double pot_multiplier;
-	static private double pot_adder;
-	static private double jackpot_multiplier;
-	static private int seconds_before_clearlag;
-	static private String start_lotto;
-	static private String no_lotto;
+	private String winning_condition;
+	private boolean randomize_frequency;
+	private boolean zero_activation_warning;
+	private double activation_chance;
+	private int iterations_to_activate;
+	private double entry_cost;
+	private String entry_confirm;
+	private String entry_no_money;
+	private double pot_multiplier;
+	private double pot_adder;
+	private double jackpot_multiplier;
+	private int seconds_before_clearlag;
+	private String start_lotto;
+	private String no_lotto;
+	private String lotto_win;
+	private String lotto_no_win;
 	
 	// Gives access to the associated plugins this one is dependent on
-	public Plugin getVault() {return vault;}
-	public Plugin getClearLag() {return clearlag;}
-	public Plugin getEssentials() {return essentials;}
+	public Vault getVault() {return vault;}
+	public Clearlag getClearLag() {return clearlag;}
+	public Essentials getEssentials() {return essentials;}
 	
 	// Getter methods for config related values
-	static public String getWinningCondition() {return winning_condition;}
-	static public String getEntryConfirmMessage() {return entry_confirm;}
-	static public String getEntryNoMoneyMessage() {return entry_no_money;}
-	static public String getStartLottoMessage() {return start_lotto;}
-	static public String getNoLottoMessage() {return no_lotto;}
-	static public double getActivationChance() {return activation_chance;}
-	static public double getEntryCost() {return entry_cost;}
-	static public double getPotMultiplier() {return pot_multiplier;}
-	static public double getPotAdder() {return pot_adder;}
-	static public double getJackpotMultiplier() {return jackpot_multiplier;}
-	static public int getIterationsToActivate() {return iterations_to_activate;}
-	static public int getSecondsBeforeClearLag() {return seconds_before_clearlag;}
-	static public boolean isRandomizingFrequency() {return randomize_frequency;}
+	public String getWinningCondition() {return winning_condition;}
+	public String getEntryConfirmMessage() {return entry_confirm;}
+	public String getEntryNoMoneyMessage() {return entry_no_money;}
+	public String getStartLottoMessage() {return start_lotto;}
+	public String getNoLottoMessage() {return no_lotto;}
+	public String getLottoWinMessage() {return lotto_win;}
+	public String getLottoNoWinMessage() {return lotto_no_win;}
+	public double getActivationChance() {return activation_chance;}
+	public double getEntryCost() {return entry_cost;}
+	public double getPotMultiplier() {return pot_multiplier;}
+	public double getPotAdder() {return pot_adder;}
+	public double getJackpotMultiplier() {return jackpot_multiplier;}
+	public int getIterationsToActivate() {return iterations_to_activate;}
+	public int getSecondsBeforeClearLag() {return seconds_before_clearlag;}
+	public boolean isRandomizingFrequency() {return randomize_frequency;}
 	
 	// Setter methods for config related values
 	public void setWinningCondition(String s) {winning_condition = s;}
@@ -75,6 +81,8 @@ public class ClearLagLotto extends JavaPlugin {
 	public void setEntryNoMoneyMessage(String s) {entry_no_money = s;}
 	public void setStartLottoMessage(String s) {start_lotto = s;}
 	public void setNoLottoMessage(String s) {no_lotto = s;}
+	public void setLottoWinMessage(String s) {lotto_win = s;}
+	public void setLottoNoWinMessage(String s) {lotto_no_win = s;}
 	public void setActivationChance(double d) {activation_chance = d;}
 	public void setEntryCost(double d) {entry_cost = d;}
 	public void setPotMultiplier(double d) {pot_multiplier = d;}
@@ -83,6 +91,16 @@ public class ClearLagLotto extends JavaPlugin {
 	public void setIterationsToActivate(int i) {iterations_to_activate = i;}
 	public void setSecondsBeforeClearLag(int i) {seconds_before_clearlag = i;}
 	public void setRandomizingFrequency(boolean b) {randomize_frequency = b;}
+	
+	public BeginLotto getLottery() {return lotto;}
+	public long getTime() {return start_time;}
+	public void setTime(long time) {start_time = time;}
+	public int getIteration() {return iteration;}
+	
+	public void iterate() {
+		if(iteration == iterations_to_activate) iteration = 1;
+		else iteration++;
+	}
 	
 	@Override
 	public void onEnable() {
@@ -104,11 +122,7 @@ public class ClearLagLotto extends JavaPlugin {
 		clearlag = (Clearlag) cl;
 		vault = (Vault) v;
 		essentials = (Essentials) e;
-
-		getCommand("pot").setExecutor(new pot());
-		getCommand("clearlaglotto").setExecutor(new cll());
-		getCommand("bet").setExecutor(new bet());
-
+		
 		loadConfig();
 		registerEvents();
 	}
@@ -116,6 +130,7 @@ public class ClearLagLotto extends JavaPlugin {
 	private void registerEvents() {
 		
 		PluginManager pm = Bukkit.getServer().getPluginManager();
+		pm.registerEvents(new ClearLagListener(this), this);
 	}
 	
 	private void loadConfig() {
@@ -144,6 +159,8 @@ public class ClearLagLotto extends JavaPlugin {
 		start_lotto = config.getString("start-lotto", ChatColor.GREEN + "May the guessing begin!" +
 		ChatColor.RED + "Type " + ChatColor.YELLOW + "/bet [amount] " + ChatColor.RED + "to enter in a guess for the number of entities removed!");
 		no_lotto = config.getString("no-lotto", ChatColor.RED + "No lottery is currently in progress.");
+		lotto_win = config.getString("lotto-win", ChatColor.GREEN + "+name has won with a guess of +guess and received $+winnings");
+		lotto_no_win = config.getString("lotto-no-win", ChatColor.RED + "No one won the lottery. How sad :(");
 		
 		// Load doubles from config file
 		activation_chance = config.getDouble("activation-chance", 1.0);
@@ -183,6 +200,8 @@ public class ClearLagLotto extends JavaPlugin {
 		config.set("entry-no-money", entry_no_money);
 		config.set("start-lotto", start_lotto);
 		config.set("no-lotto", no_lotto);
+		config.set("lotto-win", lotto_win);
+		config.set("lotto-no-win", lotto_no_win);
 		
 		config.set("activation-chance", activation_chance);
 		config.set("entry-cost", entry_cost);
@@ -198,6 +217,5 @@ public class ClearLagLotto extends JavaPlugin {
 		
 		this.saveConfig();
 	}
-
 
 }

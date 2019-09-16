@@ -1,14 +1,18 @@
 package cat.math.clearlaglotto.commands;
 
-import cat.math.clearlaglotto.ClearLagLotto;
-import cat.math.clearlaglotto.events.BeginLotto;
+import java.util.List;
+
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.List;
+import cat.math.clearlaglotto.ClearLagLotto;
+import cat.math.clearlaglotto.Entry;
+import cat.math.clearlaglotto.events.BeginLotto;
 
 public class Bet implements TabExecutor {
 	
@@ -21,7 +25,7 @@ public class Bet implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(!BeginLotto.isRunning) {
-            sender.sendMessage(clearlaglotto.getWinningCondition());
+            sender.sendMessage(clearlaglotto.getNoLottoMessage());
             return true;
         }
 
@@ -35,8 +39,10 @@ public class Bet implements TabExecutor {
         if(args.length == 0) return false;
         int bet = stringToInt(args[0]);
         if(bet < 0) return false;
-
-        // Needs to create an entry and add it to the BeginLotto event
+        
+        Entry entry = new Entry(player, bet);
+        BeginLotto lotto = clearlaglotto.getLottery();
+        lotto.addEntry(entry);
 
         return true;
     }

@@ -74,3 +74,12 @@ seconds-before-clearlag: 60
 # What message should be displayed when the betting can begin?
 
 start-lotto: '&aMay the guessing begin! &cType &e/bet [amount] &cto enter in a guess for the number of entities removed!'
+
+# If the player enters a guess when the lotto is not active, what should be displayed?
+
+no-lotto: '&cNo lottery is currently in progress.'
+
+# Message to show when the lottery ends
+
+lotto-win: '&a+name has won with a guess of +guess and received $+winnings'
+lotto-no-win: '&cNo one won the lottery. How sad :('

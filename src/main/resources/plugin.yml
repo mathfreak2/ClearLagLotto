@@ -2,27 +2,27 @@ main: cat.math.clearlaglotto.ClearLagLotto
 name: ClearLagLotto
 version: 1.0
 author: Rowan McKee, PlumpFeline
-po
+
 depend: [Vault, Essentials, ClearLag]
 
 commands:
    bet:
       description: Guess the number of entities ClearLag removes!
-      usage: /bet [number]
+      usage: §a/bet [number]
       aliases: [guess, predict]
       permission: clearlaglotto.bet
       permission-message: You do not have permission to guess a number.
       
    clearlaglotto:
       description: Gives information about the current state of the plugin.
-      usage: /clearlaglotto [args]
+      usage: §a/clearlaglotto [args]
       aliases: cll
       permission: clearlaglotto.cll
       permission-message: You don't have permission.
       
    pot:
       description: Gives the amount of money currently in the pot
-      usage: /pot
+      usage: §a/pot
       permission: clearlaglotto.pot
       permission-message: You do not have permission to view amount in the pot.   
       

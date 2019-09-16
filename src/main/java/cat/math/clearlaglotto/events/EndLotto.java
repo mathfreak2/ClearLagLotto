@@ -5,24 +5,22 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 
+import cat.math.clearlaglotto.ClearLagLotto;
+
 public class EndLotto extends Event {
 
 	private static final HandlerList handlers = new HandlerList();
-	private String message;
-	private Plugin plugin;
-	private BeginLotto lotto;
+	private ClearLagLotto plugin;
 	
-	EndLotto(String message, Plugin plugin, BeginLotto lotto) {
-		this.message = message;
+	public EndLotto(ClearLagLotto plugin) {
 		this.plugin = plugin;
-		this.lotto = lotto;
 	}
 	
     public void runEvent() {
     	
     	Bukkit.getServer().getPluginManager().callEvent(this);
     	BeginLotto.isRunning = false;
-    	Bukkit.getServer().broadcastMessage(message);
+    	String message;
     }
 	
 	@Override
