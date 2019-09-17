@@ -7,6 +7,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import cat.math.clearlaglotto.ClearLagLotto;
 import cat.math.clearlaglotto.events.BeginLotto;
@@ -20,7 +22,6 @@ public class ClearLagListener implements Listener {
 	
 	public ClearLagListener(ClearLagLotto clearlaglotto) {
 		this.clearlaglotto = clearlaglotto;
-		callOnPluginEnable();
 	}
 	
 	@EventHandler
@@ -33,6 +34,7 @@ public class ClearLagListener implements Listener {
 		
 		int interval = clearlagconfig.getInt("auto-removal.autoremoval-interval", 300);
 		boolean randomize = clearlaglotto.isRandomizingFrequency();
+		int seconds = clearlaglotto.getSecondsBeforeClearLag();
 		
 		boolean activate_lottery = false;
 		
@@ -53,9 +55,25 @@ public class ClearLagListener implements Listener {
 			EndLotto ending = new EndLotto(clearlaglotto);
 			ending.runEvent();
 		}
-	}
-	
-	public void callOnPluginEnable() {
-		onClearLag(new EntityRemoveEvent(null, null));
+		
+		class RunLotto implements Runnable {
+			
+			ClearLagLotto plugin;
+			
+			public RunLotto(ClearLagLotto plugin) {
+				this.plugin = plugin;
+			}
+			
+			public void run() {
+				
+				plugin.getLottery().runEvent();
+			}
+		}
+		
+		if(activate_lottery) {
+			
+			BukkitScheduler bs = Bukkit.getServer().getScheduler();
+			bs.runTaskLater(clearlaglotto, new RunLotto(clearlaglotto), 20*(interval-seconds));
+		}
 	}
 }
