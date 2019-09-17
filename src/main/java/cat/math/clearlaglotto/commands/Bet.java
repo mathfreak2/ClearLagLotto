@@ -23,28 +23,33 @@ public class Bet implements TabExecutor {
 	}
 	
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if(!BeginLotto.isRunning) {
-            sender.sendMessage(clearlaglotto.getNoLottoMessage());
-            return true;
-        }
-
-        if(!(sender instanceof Player) || !sender.hasPermission("clearlaglotto.bet")) {
-            sender.sendMessage("There is a lottery currently in progress, but you may not participate!");
-            return true;
-        }
-
-        OfflinePlayer player = (OfflinePlayer) sender;
-
-        if(args.length == 0) return false;
-        int bet = stringToInt(args[0]);
-        if(bet < 0) return false;
-        
-        Entry entry = new Entry(player, bet);
-        BeginLotto lotto = clearlaglotto.getLottery();
-        lotto.addEntry(entry);
-
-        return true;
+    	
+    	if(command.getName().equals("bet")) {
+	        
+    		if(!BeginLotto.isRunning) {
+	            sender.sendMessage(clearlaglotto.getNoLottoMessage());
+	            return true;
+	        }
+	
+	        if(!(sender instanceof Player) || !sender.hasPermission("clearlaglotto.bet")) {
+	            sender.sendMessage("There is a lottery currently in progress, but you may not participate!");
+	            return true;
+	        }
+	
+	        OfflinePlayer player = (OfflinePlayer) sender;
+	
+	        if(args.length == 0) return false;
+	        int bet = stringToInt(args[0]);
+	        if(bet < 0) return false;
+	        
+	        Entry entry = new Entry(player, bet);
+	        BeginLotto lotto = clearlaglotto.getLottery();
+	        lotto.addEntry(entry);
+	
+	        return true;
+    	}
+    	
+    	return false;
     }
 
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
