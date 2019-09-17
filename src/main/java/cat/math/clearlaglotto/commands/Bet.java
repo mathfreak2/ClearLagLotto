@@ -61,11 +61,19 @@ public class Bet implements TabExecutor {
         int result = 0;
         try {
             for(int i=0; i<s.length(); i++) {
-                double m = Character.getNumericValue(s.charAt(i));
-                double m1 = Math.pow(10, s.length()-i-1)*m;
-                if(!(m == 0 || m == 1 || m == 2 || m == 3 || m == 4 || m == 5 || m == 6 || m == 7 || m == 8 || m == 9))
-                    return -1;
-                result += m1;
+                double m;
+                if(s.charAt(i) == '0') m = 0;
+                else if(s.charAt(i) == '1') m = 1;
+                else if(s.charAt(i) == '2') m = 2;
+                else if(s.charAt(i) == '3') m = 3;
+                else if(s.charAt(i) == '4') m = 4;
+                else if(s.charAt(i) == '5') m = 5;
+                else if(s.charAt(i) == '6') m = 6;
+                else if(s.charAt(i) == '7') m = 7;
+                else if(s.charAt(i) == '8') m = 8;
+                else if(s.charAt(i) == '9') m = 9;
+                else return -1;
+                result += Math.pow(10, s.length()-i-1)*m;
             }
         }
         catch(Exception e) {

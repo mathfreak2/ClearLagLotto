@@ -6,8 +6,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 
+import cat.math.clearlaglotto.ClearLagLotto;
+
 public class Cll implements TabExecutor {
 
+	ClearLagLotto plugin;
+	
+	public Cll(ClearLagLotto plugin) {
+		this.plugin = plugin;
+	}
+	
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		// TODO Auto-generated method stub
 		return null;
@@ -15,6 +23,9 @@ public class Cll implements TabExecutor {
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return false;
 	}
 
