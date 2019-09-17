@@ -53,7 +53,7 @@ public class ClearLagListener implements Listener {
 		
 		if(BeginLotto.isRunning) {
 			EndLotto ending = new EndLotto(clearlaglotto);
-			ending.runEvent();
+			ending.runEvent(removed);
 		}
 		
 		class RunLotto implements Runnable {
