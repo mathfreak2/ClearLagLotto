@@ -17,6 +17,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import cat.math.clearlaglotto.commands.Bet;
+import cat.math.clearlaglotto.commands.Cll;
+import cat.math.clearlaglotto.commands.Pot;
 import cat.math.clearlaglotto.events.BeginLotto;
 import cat.math.clearlaglotto.listeners.ClearLagListener;
 import me.minebuilders.clearlag.*;
@@ -52,6 +55,7 @@ public class ClearLagLotto extends JavaPlugin {
 	private String no_lotto;
 	private String lotto_win;
 	private String lotto_no_win;
+	private String lotto_jackpot;
 	
 	// Gives access to the associated plugins this one is dependent on
 	public Vault getVault() {return vault;}
@@ -66,6 +70,7 @@ public class ClearLagLotto extends JavaPlugin {
 	public String getNoLottoMessage() {return no_lotto;}
 	public String getLottoWinMessage() {return lotto_win;}
 	public String getLottoNoWinMessage() {return lotto_no_win;}
+	public String getLottoJackpotMessage() {return lotto_jackpot;}
 	public double getActivationChance() {return activation_chance;}
 	public double getEntryCost() {return entry_cost;}
 	public double getPotMultiplier() {return pot_multiplier;}
@@ -83,6 +88,7 @@ public class ClearLagLotto extends JavaPlugin {
 	public void setNoLottoMessage(String s) {no_lotto = s;}
 	public void setLottoWinMessage(String s) {lotto_win = s;}
 	public void setLottoNoWinMessage(String s) {lotto_no_win = s;}
+	public void setLottoJackpotMessage(String s) {lotto_jackpot = s;}
 	public void setActivationChance(double d) {activation_chance = d;}
 	public void setEntryCost(double d) {entry_cost = d;}
 	public void setPotMultiplier(double d) {pot_multiplier = d;}
@@ -125,6 +131,10 @@ public class ClearLagLotto extends JavaPlugin {
 		
 		loadConfig();
 		registerEvents();
+		
+		this.getCommand("bet").setExecutor(new Bet(this));
+		this.getCommand("clearlaglotto").setExecutor(new Cll(this));
+		this.getCommand("pot").setExecutor(new Pot(this));
 	}
 	
 	private void registerEvents() {
@@ -161,6 +171,8 @@ public class ClearLagLotto extends JavaPlugin {
 		no_lotto = config.getString("no-lotto", ChatColor.RED + "No lottery is currently in progress.");
 		lotto_win = config.getString("lotto-win", ChatColor.GREEN + "+name has won with a guess of +guess and received $+winnings");
 		lotto_no_win = config.getString("lotto-no-win", ChatColor.RED + "No one won the lottery. How sad :(");
+		lotto_jackpot = config.getString("lotto-jackpot",ChatColor.GREEN + "+name won the " + 
+				ChatColor.YELLOW + "jackpot " + ChatColor.GREEN + "with a guess of +guess and received $+winnings! Congratulations, +name!!");
 		
 		// Load doubles from config file
 		activation_chance = config.getDouble("activation-chance", 1.0);
@@ -202,6 +214,7 @@ public class ClearLagLotto extends JavaPlugin {
 		config.set("no-lotto", no_lotto);
 		config.set("lotto-win", lotto_win);
 		config.set("lotto-no-win", lotto_no_win);
+		config.set("lotto-jackpot", lotto_jackpot);
 		
 		config.set("activation-chance", activation_chance);
 		config.set("entry-cost", entry_cost);
