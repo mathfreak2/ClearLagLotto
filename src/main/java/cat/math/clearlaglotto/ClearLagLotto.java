@@ -135,6 +135,8 @@ public class ClearLagLotto extends JavaPlugin {
 		this.getCommand("bet").setExecutor(new Bet(this));
 		this.getCommand("clearlaglotto").setExecutor(new Cll(this));
 		this.getCommand("pot").setExecutor(new Pot(this));
+		
+		lotto = new BeginLotto(start_lotto, this);
 	}
 	
 	private void registerEvents() {
