@@ -83,3 +83,4 @@ no-lotto: '&cNo lottery is currently in progress.'
 
 lotto-win: '&a+name has won with a guess of +guess and received $+winnings'
 lotto-no-win: '&cNo one won the lottery. How sad :('
+lotto-jackpot: '&a+name won the &ejackpot &awith a guess of +guess and received $+winnings! Congratulations, +name!!' 
