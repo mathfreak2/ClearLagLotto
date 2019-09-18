@@ -1,6 +1,7 @@
 package cat.math.clearlaglotto.commands;
 
 import cat.math.clearlaglotto.ClearLagLotto;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -61,159 +62,116 @@ public class Cll implements TabExecutor {
 
                     if(args.length == 3){
 
-                        if(args[1].equalsIgnoreCase("winning-condition")){
+                        switch (args[1].toLowerCase()){
+                            case "winning-condition":{
 
-                            List<String> list = new ArrayList<>();
+                                List<String> list = new ArrayList<>();
 
-                            list.add("absolute");
-                            list.add("blackjack");
-                            list.add("exact");
+                                list.add("absolute");
+                                list.add("blackjack");
+                                list.add("exact");
 
-                            return list;
+                                return list;
+                            }
+
+                            case "randomize-frequency":
+                            case "zero-activation-warning": {
+
+                                List<String> list = new ArrayList<>();
+
+                                list.add("true");
+                                list.add("false");
+
+                                return list;
+
+                            }
+
+                            case "entry-confirm":
+                            case "entry-no-money":
+                            case "start-lotto":
+                            case "no-lotto":
+                            case "lotto-win":
+                            case "lotto-no-win":
+                            case "lotto-jackpot":{
+
+                                List<String> list = new ArrayList<>();
+
+                                list.add("<message>");
+
+                                return list;
+                            }
+                            case "activation-chance":{
+                                List<String> list = new ArrayList<>();
+
+                                list.add("0");
+                                list.add("0.25");
+                                list.add("0.50");
+                                list.add("0.75");
+                                list.add("1");
+
+                                return list;
+                            }
+                            case "iterations-to-activate":{
+
+                                List<String> list = new ArrayList<>();
+
+                                list.add("0");
+                                list.add("1");
+                                list.add("5");
+                                list.add("10");
+
+                                return list;
+                            }
+                            case "pot-multiplier":{
+
+                                List<String> list = new ArrayList<>();
+
+                                list.add("0.5");
+                                list.add("1");
+                                list.add("2");
+
+
+                                return list;
+
+                            }
+
+                            case "pot-adder":{
+
+                                List<String> list = new ArrayList<>();
+
+                                list.add("<amount>");
+
+                                return list;
+
+                            }
+                            case "jackpot-multiplier":{
+
+                                List<String> list = new ArrayList<>();
+
+                                list.add("4");
+                                list.add("3");
+                                list.add("2");
+                                list.add("1");
+
+                                return list;
+                            }
+
+                            case "seconds-before-clearlag":{
+
+                                List<String> list = new ArrayList<>();
+
+                                list.add("<seconds>");
+
+                                return list;
+
+                            }
+
+                            default:{
+                                sender.sendMessage(ChatColor.RED + "Please enter a correct config option from those listed");
+                                return null;
+                            }
                         }
-                        if(args[1].equalsIgnoreCase("randomize-frequency")){
 
-                            List<String> list = new ArrayList<>();
-
-                            list.add("true");
-                            list.add("false");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("zero-activation-warning")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("true");
-                            list.add("false");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("activation-chance")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("0");
-                            list.add("0.25");
-                            list.add("0.50");
-                            list.add("0.75");
-                            list.add("1");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("iterations-to-activate")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("0");
-                            list.add("1");
-                            list.add("5");
-                            list.add("10");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("entry-cost")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<amount>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("entry-confirm")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<message>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("entry-no-money")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<message>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("pot-multiplier")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("0.5");
-                            list.add("1");
-                            list.add("2");
-
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("pot-adder")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<amount>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("jackpot-multiplier")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("3");
-                            list.add("4");
-                            list.add("2");
-                            list.add("1");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("seconds-before-clearlag")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<seconds>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("start-lotto")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<message>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("no-lotto")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<message>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("lotto-win")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<message>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("lotto-no-win")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<message>");
-
-                            return list;
-                        }
-                        if(args[1].equalsIgnoreCase("lotto-jackpot")){
-
-                            List<String> list = new ArrayList<>();
-
-                            list.add("<message>");
-
-                            return list;
-                        }
                     }
 
 
