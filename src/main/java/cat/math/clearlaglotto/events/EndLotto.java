@@ -58,12 +58,12 @@ public class EndLotto extends Event {
     	if(winner == null) Bukkit.getServer().broadcastMessage(Util.colorMessage(plugin.getLottoNoWinMessage()));
     	else {
     		
-    		double winnings = plugin.getLottery().getPot();
+    		double winning = plugin.getLottery().getPot();
     		if(winner.getEntry() == removed) {
-    			winnings *= plugin.getJackpotMultiplier();
+    			winning *= plugin.getJackpotMultiplier();
     			message = Util.colorMessage(plugin.getLottoJackpotMessage());
     		}
-    		
+    		String winnings = String.format("%.2f", winning);
     		message = message.replaceAll("%name%",winner.getPlayer().getName());
     		message = message.replaceAll("%guess%", ""+winner.getEntry());
     		message = message.replaceAll("%winnings%", ""+winnings);

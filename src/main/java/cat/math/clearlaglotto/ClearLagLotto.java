@@ -145,7 +145,7 @@ public class ClearLagLotto extends JavaPlugin {
 		pm.registerEvents(new ClearLagListener(this), this);
 	}
 	
-	private void loadConfig() {
+	public void loadConfig() {
 		
 		File directory = getDataFolder();
 		
@@ -164,6 +164,12 @@ public class ClearLagLotto extends JavaPlugin {
 		
 		FileConfiguration config = this.getConfig();
 		
+		try {
+			config.load(new File(directory, "config.yml"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		// Load strings from config file
 		winning_condition = Util.colorMessage(config.getString("winning-condition", "absolute"));
 		entry_confirm = Util.colorMessage(config.getString("entry-confirm", ChatColor.GREEN + "You have entered a guess into the lottery!"));
@@ -181,7 +187,7 @@ public class ClearLagLotto extends JavaPlugin {
 		entry_cost = config.getDouble("entry-cost", 100.0);
 		pot_multiplier = config.getDouble("pot-multiplier", 1.0);
 		pot_adder = config.getDouble("pot-adder", 0.0);
-		jackpot_multiplier = config.getDouble("jackpot_multiplier", 3.0);
+		jackpot_multiplier = config.getDouble("jackpot-multiplier", 3.0);
 		
 		// Load integers from config file
 		iterations_to_activate = config.getInt("iterations-to-activate", 1);

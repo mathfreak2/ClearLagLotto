@@ -25,10 +25,12 @@ public class Pot implements TabExecutor {
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		// TODO Auto-generated method stub
-
+		
+		String pot = String.format("%.2f", plugin.getLottery().getPot());
+		
 		if(!(sender instanceof Player) || sender.hasPermission("clearlaglotto.pot")) {
 			sender.sendMessage(ChatColor.DARK_AQUA + "There is " + ChatColor.YELLOW + "$" + 
-					plugin.getLottery().getPot() + ChatColor.DARK_AQUA + " in the pot.");
+					pot + ChatColor.DARK_AQUA + " in the pot.");
 		}
 		else {
 			sender.sendMessage(ChatColor.RED + "You do not have permission to view how much money is in the pot.");
