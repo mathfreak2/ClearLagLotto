@@ -89,6 +89,7 @@ public class ClearLagLotto extends JavaPlugin {
 	public void setIterationsToActivate(int i) {iterations_to_activate = i;}
 	public void setSecondsBeforeClearLag(int i) {seconds_before_clearlag = i;}
 	public void setRandomizingFrequency(boolean b) {randomize_frequency = b;}
+	public void setZero_activation_warning(boolean b) {zero_activation_warning = b;}
 	
 	public BeginLotto getLottery() {return lotto;}
 	public long getTime() {return start_time;}

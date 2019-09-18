@@ -134,7 +134,7 @@ public class Cll implements TabExecutor {
                                 return list;
 
                             }
-
+                            case "entry-cost":
                             case "pot-adder":{
 
                                 List<String> list = new ArrayList<>();
@@ -167,7 +167,6 @@ public class Cll implements TabExecutor {
                             }
 
                             default:{
-                                sender.sendMessage(ChatColor.RED + "Please enter a correct config option from those listed");
                                 return null;
                             }
                         }
@@ -198,6 +197,186 @@ public class Cll implements TabExecutor {
 			sender.sendMessage("Config reloaded");
 			return true;
 		}
+
+		if(args[0].equalsIgnoreCase("config")) {
+
+		    if(args.length == 3) {
+
+
+                switch (args[1].toLowerCase()) {
+                    case "winning-condition": {
+
+                        if(args[2].equalsIgnoreCase("absolute") || args[2].equalsIgnoreCase("blackjack") || args[2].equalsIgnoreCase("exact")){
+
+                            String input = args[2];
+
+                            plugin.setWinningCondition(input);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "winning-condition updated with: " + input);
+                            return true;
+                        }
+
+                    }
+
+                    case "randomize-frequency":{
+
+                        if(args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("false")){
+
+                            boolean input = Boolean.parseBoolean(args[2]);
+
+                            plugin.setRandomizingFrequency(input);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "randomize-frequency updated with: " + input);
+                            return true;
+                        }
+
+                    }
+
+                    case "zero-activation-warning": {
+
+                        if(args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("false")){
+
+                            boolean input = Boolean.parseBoolean(args[2]);
+
+                            plugin.setZero_activation_warning(input);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "zero-activation-warning updated with: " + input);
+                            return true;
+
+                        }
+
+                    }
+
+                    case "entry-confirm":{
+                        //TODO argument concat for messages
+                    }
+
+                    case "entry-no-money":{
+                        //TODO argument concat for messages
+                    }
+
+                    case "start-lotto":{
+                        //TODO argument concat for messages
+
+                    }
+
+                    case "no-lotto":{
+                        //TODO argument concat for messages
+
+                    }
+
+                    case "lotto-win":{
+                        //TODO argument concat for messages
+
+                    }
+
+                    case "lotto-no-win":{
+                        //TODO argument concat for messages
+
+                    }
+
+                    case "lotto-jackpot": {
+                        //TODO argument concat for messages
+
+                    }
+
+                    case "activation-chance": {
+                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 1){
+
+                            double num = Double.valueOf(args[2]).doubleValue();
+                            plugin.setActivationChance(num);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "activation-chance updated with: " + num);
+                            return true;
+                        }
+
+                    }
+
+                    case "iterations-to-activate": {
+
+                        if(Integer.valueOf(args[2]).intValue() >= 0){
+
+                            int num = Integer.valueOf(args[2]).intValue();
+                            plugin.setIterationsToActivate(num);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "iterations-to-activate has been updated with: " + num);
+                            return true;
+                        }
+
+                    }
+
+                    case "pot-multiplier": {
+
+                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 10){
+
+                            double num = Double.valueOf(args[2]).doubleValue();
+                            plugin.setPotMultiplier(num);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "pot-multiplier updated with: " + num);
+                            return true;
+                        }
+
+                    }
+
+                    case "pot-adder": {
+
+                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 10){
+
+                            double num = Double.valueOf(args[2]).doubleValue();
+                            plugin.setPotAdder(num);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "pot-adder updated with: " + num);
+                            return true;
+                        }
+
+                    }
+                    case "jackpot-multiplier": {
+
+                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 10){
+
+                            double num = Double.valueOf(args[2]).doubleValue();
+                            plugin.setJackpotMultiplier(num);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "jackpot-multiplier updated with: " + num);
+                            return true;
+                        }
+
+                    }
+
+                    case "seconds-before-clearlag": {
+
+                        if(Integer.valueOf(args[2]).intValue() >= 0){
+
+                            int num = Integer.valueOf(args[2]).intValue();
+                            plugin.setSecondsBeforeClearLag(num);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "seconds-before-clearlag has been updated with: " + num);
+                            return true;
+                        }
+
+                    }
+                    case "entry-cost":{
+                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 1){
+
+                            double num = Double.valueOf(args[2]).doubleValue();
+                            plugin.setEntryCost(num);
+                            plugin.editConfig();
+                            sender.sendMessage(ChatColor.GREEN + "entry-cost updated with: " + num);
+                            return true;
+                        }
+                    }
+
+                    default: {
+                        sender.sendMessage(ChatColor.RED + "Please enter a valid config option or config input.");
+                        return false;
+                    }
+                }
+
+            }
+
+
+
+        }
 		
 		return false;
 	}
