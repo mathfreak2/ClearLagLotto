@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,10 @@ public class Cll implements TabExecutor {
 	}
 	
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+
+        if(!sender.hasPermission("clearlaglotto.cll")) {
+            return null;
+        }
 
         if (command.getName().equalsIgnoreCase("clearlaglotto")) {
 
@@ -189,6 +194,11 @@ public class Cll implements TabExecutor {
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
+        if(!(sender instanceof Player) || !sender.hasPermission("clearlaglotto.cll")) {
+            sender.sendMessage(ChatColor.RED + "You do not have sufficient permissions.");
+            return true;
+        }
+
 		
 		if(args.length == 0) return false;
 		
@@ -216,6 +226,9 @@ public class Cll implements TabExecutor {
                             return true;
                         }
 
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (blackjack or absolute or exact)");
+                        return false;
+
                     }
 
                     case "randomize-frequency":{
@@ -229,6 +242,9 @@ public class Cll implements TabExecutor {
                             sender.sendMessage(ChatColor.GREEN + "randomize-frequency updated with: " + input);
                             return true;
                         }
+
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (True or False)");
+                        return false;
 
                     }
 
@@ -245,93 +261,134 @@ public class Cll implements TabExecutor {
 
                         }
 
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (True or False)");
+                        return false;
+
                     }
 
 
                     case "activation-chance": {
-                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 1){
+                        if(args[2].matches("[0-9]*\\.?[0-9]*")) {
+                            if (Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 1) {
 
-                            double num = Double.valueOf(args[2]).doubleValue();
-                            plugin.setActivationChance(num);
-                            plugin.editConfig();
-                            sender.sendMessage(ChatColor.GREEN + "activation-chance updated with: " + num);
-                            return true;
+                                double num = Double.valueOf(args[2]).doubleValue();
+                                plugin.setActivationChance(num);
+                                plugin.editConfig();
+                                sender.sendMessage(ChatColor.GREEN + "activation-chance updated with: " + num);
+                                return true;
+                            }
                         }
+
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (Any decimal between 0 and 1)");
+                        return false;
 
                     }
 
                     case "iterations-to-activate": {
 
-                        if(Integer.valueOf(args[2]).intValue() >= 0){
+                        if(args[2].matches("[0-9]+")) {
 
-                            int num = Integer.valueOf(args[2]).intValue();
-                            plugin.setIterationsToActivate(num);
-                            plugin.editConfig();
-                            sender.sendMessage(ChatColor.GREEN + "iterations-to-activate has been updated with: " + num);
-                            return true;
+                            if (Integer.valueOf(args[2]).intValue() >= 0) {
+
+                                int num = Integer.valueOf(args[2]).intValue();
+                                plugin.setIterationsToActivate(num);
+                                plugin.editConfig();
+                                sender.sendMessage(ChatColor.GREEN + "iterations-to-activate has been updated with: " + num);
+                                return true;
+                            }
                         }
+
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (Any integer 0 and greater)");
+                        return false;
 
                     }
 
                     case "pot-multiplier": {
+                        if(args[2].matches("[0-9]*\\.?[0-9]*")) {
 
-                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 10){
+                            if (Double.valueOf(args[2]).doubleValue() >= 0 ) {
 
-                            double num = Double.valueOf(args[2]).doubleValue();
-                            plugin.setPotMultiplier(num);
-                            plugin.editConfig();
-                            sender.sendMessage(ChatColor.GREEN + "pot-multiplier updated with: " + num);
-                            return true;
+                                double num = Double.valueOf(args[2]).doubleValue();
+                                plugin.setPotMultiplier(num);
+                                plugin.editConfig();
+                                sender.sendMessage(ChatColor.GREEN + "pot-multiplier updated with: " + num);
+                                return true;
+                            }
                         }
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (Any decimal 0 and greater )");
+                        return false;
 
                     }
 
                     case "pot-adder": {
 
-                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 10){
+                        if(args[2].matches("[0-9]*\\.?[0-9]*")) {
+                            if (Double.valueOf(args[2]).doubleValue() >= 0) {
 
-                            double num = Double.valueOf(args[2]).doubleValue();
-                            plugin.setPotAdder(num);
-                            plugin.editConfig();
-                            sender.sendMessage(ChatColor.GREEN + "pot-adder updated with: " + num);
-                            return true;
+                                double num = Double.valueOf(args[2]).doubleValue();
+                                plugin.setPotAdder(num);
+                                plugin.editConfig();
+                                sender.sendMessage(ChatColor.GREEN + "pot-adder updated with: " + num);
+                                return true;
+                            }
+
+
                         }
+
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (Any decimal 0 or greater)");
+                        return false;
+
 
                     }
                     case "jackpot-multiplier": {
 
-                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 10){
+                        if(args[2].matches("[0-9]*\\.?[0-9]*")) {
+                            if (Double.valueOf(args[2]).doubleValue() >= 0) {
 
-                            double num = Double.valueOf(args[2]).doubleValue();
-                            plugin.setJackpotMultiplier(num);
-                            plugin.editConfig();
-                            sender.sendMessage(ChatColor.GREEN + "jackpot-multiplier updated with: " + num);
-                            return true;
+                                double num = Double.valueOf(args[2]).doubleValue();
+                                plugin.setJackpotMultiplier(num);
+                                plugin.editConfig();
+                                sender.sendMessage(ChatColor.GREEN + "jackpot-multiplier updated with: " + num);
+                                return true;
+                            }
                         }
+
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (Any decimal 0 and greater)");
+                        return false;
 
                     }
 
                     case "seconds-before-clearlag": {
 
-                        if(Integer.valueOf(args[2]).intValue() >= 0){
+                        if(args[2].matches("[0-9]+")) {
 
-                            int num = Integer.valueOf(args[2]).intValue();
-                            plugin.setSecondsBeforeClearLag(num);
-                            plugin.editConfig();
-                            sender.sendMessage(ChatColor.GREEN + "seconds-before-clearlag has been updated with: " + num);
-                            return true;
+                            if (Integer.valueOf(args[2]).intValue() >= 0) {
+
+                                int num = Integer.valueOf(args[2]).intValue();
+                                plugin.setSecondsBeforeClearLag(num);
+                                plugin.editConfig();
+                                sender.sendMessage(ChatColor.GREEN + "seconds-before-clearlag has been updated with: " + num);
+                                return true;
+                            }
                         }
+                    sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (Any integer 0 and greater)");
+                    return false;
 
                     }
                     case "entry-cost":{
-                        if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 1){
+                        if(args[2].matches("[0-9]*\\.?[0-9]*")) {
+                            if (Double.valueOf(args[2]).doubleValue() >= 0) {
 
-                            double num = Double.valueOf(args[2]).doubleValue();
-                            plugin.setEntryCost(num);
-                            plugin.editConfig();
-                            sender.sendMessage(ChatColor.GREEN + "entry-cost updated with: " + num);
-                            return true;
+                                double num = Double.valueOf(args[2]).doubleValue();
+                                plugin.setEntryCost(num);
+                                plugin.editConfig();
+                                sender.sendMessage(ChatColor.GREEN + "entry-cost updated with: " + num);
+                                return true;
+                            }
                         }
+                        sender.sendMessage(ChatColor.RED + "Please check your input for errors!" + ChatColor.GRAY + " (Any decimal 0 and greater)");
+                        return false;
+
                     }
 
                     default: {
