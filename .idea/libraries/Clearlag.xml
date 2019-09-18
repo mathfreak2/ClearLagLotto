@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Clearlag">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Clearlag.jar!/" />
+      <root url="jar://$PROJECT_DIR$/EssentialsX-2.17.1.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Vault.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

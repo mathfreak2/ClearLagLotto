@@ -2,7 +2,7 @@ main: cat.math.clearlaglotto.ClearLagLotto
 name: ClearLagLotto
 version: 1.0
 author: Rowan McKee, PlumpFeline
-po
+
 depend: [Vault, Essentials, ClearLag]
 
 commands:

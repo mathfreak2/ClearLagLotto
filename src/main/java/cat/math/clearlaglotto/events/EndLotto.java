@@ -1,18 +1,15 @@
 package cat.math.clearlaglotto.events;
 
-import java.util.ArrayList;
-
+import cat.math.clearlaglotto.ClearLagLotto;
+import cat.math.clearlaglotto.Entry;
+import cat.math.clearlaglotto.Util;
+import com.earth2me.essentials.Essentials;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.bukkit.plugin.Plugin;
 
-import com.earth2me.essentials.Essentials;
-
-import cat.math.clearlaglotto.ClearLagLotto;
-import cat.math.clearlaglotto.Entry;
-import cat.math.clearlaglotto.Util;
+import java.util.ArrayList;
 
 public class EndLotto extends Event {
 
