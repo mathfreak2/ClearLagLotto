@@ -247,38 +247,6 @@ public class Cll implements TabExecutor {
 
                     }
 
-                    case "entry-confirm":{
-                        //TODO argument concat for messages
-                    }
-
-                    case "entry-no-money":{
-                        //TODO argument concat for messages
-                    }
-
-                    case "start-lotto":{
-                        //TODO argument concat for messages
-
-                    }
-
-                    case "no-lotto":{
-                        //TODO argument concat for messages
-
-                    }
-
-                    case "lotto-win":{
-                        //TODO argument concat for messages
-
-                    }
-
-                    case "lotto-no-win":{
-                        //TODO argument concat for messages
-
-                    }
-
-                    case "lotto-jackpot": {
-                        //TODO argument concat for messages
-
-                    }
 
                     case "activation-chance": {
                         if(Double.valueOf(args[2]).doubleValue() >= 0 && Double.valueOf(args[2]).doubleValue() <= 1){
@@ -372,6 +340,119 @@ public class Cll implements TabExecutor {
                     }
                 }
 
+            }
+
+            if(args.length >= 3) {
+
+                int count = args.length;
+
+                switch (args[1].toLowerCase()){
+
+                    case "entry-confirm":{
+                        String message = "";
+
+                        for(int i = 2; i<count; i++){
+                            message += args[i] + " ";
+                        }
+
+                        plugin.setEntryConfirmMessage(message);
+                        plugin.editConfig();
+                        sender.sendMessage(ChatColor.GREEN + "entry-confirm updated with: " + message);
+                        return true;
+
+
+                    }
+
+                    case "entry-no-money":{
+
+                        String message = "";
+
+                        for(int i = 2; i<count; i++){
+                            message += args[i] + " ";
+                        }
+
+                        plugin.setEntryNoMoneyMessage(message);
+                        plugin.editConfig();
+                        sender.sendMessage(ChatColor.GREEN + "entry-no-money updated with: " + message);
+                        return true;
+
+                    }
+
+                    case "start-lotto":{
+                        String message = "";
+
+                        for(int i = 2; i<count; i++){
+                            message += args[i] + " ";
+                        }
+
+                        plugin.setStartLottoMessage(message);
+                        plugin.editConfig();
+                        sender.sendMessage(ChatColor.GREEN + "start-lotto updated with: " + message);
+                        return true;
+
+                    }
+
+                    case "no-lotto":{
+                        String message = "";
+
+                        for(int i = 2; i<count; i++){
+                            message += args[i] + " ";
+                        }
+
+                        plugin.setNoLottoMessage(message);
+                        plugin.editConfig();
+                        sender.sendMessage(ChatColor.GREEN + "no-lotto updated with: " + message);
+                        return true;
+
+                    }
+
+                    case "lotto-win":{
+                        String message = "";
+
+                        for(int i = 2; i<count; i++){
+                            message += args[i] + " ";
+                        }
+
+                        plugin.setLottoWinMessage(message);
+                        plugin.editConfig();
+                        sender.sendMessage(ChatColor.GREEN + "lotto-win updated with: " + message);
+                        return true;
+
+                    }
+
+                    case "lotto-no-win":{
+                        String message = "";
+
+                        for(int i = 2; i<count; i++){
+                            message += args[i] + " ";
+                        }
+
+                        plugin.setLottoNoWinMessage(message);
+                        plugin.editConfig();
+                        sender.sendMessage(ChatColor.GREEN + "lotto-no-win updated with: " + message);
+                        return true;
+
+                    }
+
+                    case "lotto-jackpot": {
+                        String message = "";
+
+                        for(int i = 2; i<count; i++){
+                            message += args[i] + " ";
+                        }
+
+                        plugin.setLottoJackpotMessage(message);
+                        plugin.editConfig();
+                        sender.sendMessage(ChatColor.GREEN + "lotto-jackpot updated with: " + message);
+                        return true;
+
+                    }
+
+                    default: {
+                        sender.sendMessage(ChatColor.RED + "Please enter a valid config option or config input.");
+                        return false;
+                    }
+                }
             }
 
 
