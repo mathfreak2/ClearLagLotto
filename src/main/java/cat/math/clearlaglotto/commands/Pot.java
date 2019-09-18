@@ -5,8 +5,10 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
 import cat.math.clearlaglotto.ClearLagLotto;
+import net.md_5.bungee.api.ChatColor;
 
 public class Pot implements TabExecutor {
 
@@ -23,7 +25,16 @@ public class Pot implements TabExecutor {
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		// TODO Auto-generated method stub
-		return false;
+
+		if(!(sender instanceof Player) || sender.hasPermission("clearlaglotto.pot")) {
+			sender.sendMessage(ChatColor.DARK_AQUA + "There is " + ChatColor.YELLOW + "$" + 
+					plugin.getLottery().getPot() + ChatColor.DARK_AQUA + " in the pot.");
+		}
+		else {
+			sender.sendMessage(ChatColor.RED + "You do not have permission to view how much money is in the pot.");
+		}
+		
+		return true;
 	}
 
 }

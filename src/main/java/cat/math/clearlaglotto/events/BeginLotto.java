@@ -16,24 +16,21 @@ import com.earth2me.essentials.User;
 
 import cat.math.clearlaglotto.ClearLagLotto;
 import cat.math.clearlaglotto.Entry;
+import cat.math.clearlaglotto.Util;
 
 public class BeginLotto extends Event {
 
 	private static final HandlerList handlers = new HandlerList();
 	public static boolean isRunning = false;
-	private String message;
 	private ClearLagLotto plugin;
 	
 	// Values for the list of entries and how much is in the pot
 	private ArrayList<Entry> entries = new ArrayList<Entry>();
 	private double pot;
 	
-	public BeginLotto(String message, ClearLagLotto plugin) {
-		this.message = message;
+	public BeginLotto(ClearLagLotto plugin) {
 		this.plugin = plugin;
 	}
-	
-	public String getMessage() {return message;}
 	
 	@Override
 	public HandlerList getHandlers() {
@@ -49,7 +46,7 @@ public class BeginLotto extends Event {
     	
     	Bukkit.getServer().getPluginManager().callEvent(this);
     	isRunning = true;
-    	Bukkit.getServer().broadcastMessage(message);
+    	Bukkit.getServer().broadcastMessage(Util.colorMessage(plugin.getStartLottoMessage()));
     }
     
 	public ArrayList<Entry> getEntryList() {return entries;}
@@ -77,7 +74,7 @@ public class BeginLotto extends Event {
 				BigDecimal balance = u.getMoney();
 				BigDecimal entrycost = new BigDecimal(plugin.getEntryCost());
 				if(balance.compareTo(entrycost) < 0) {
-					u.sendMessage(plugin.getEntryNoMoneyMessage());
+					u.sendMessage(Util.colorMessage(plugin.getEntryNoMoneyMessage()));
 					return;
 				}
 				break;
@@ -90,7 +87,12 @@ public class BeginLotto extends Event {
 		
 		if(plugin.getEntryCost() != 0) {
 			CommandSender sender = (CommandSender)Bukkit.getServer().getConsoleSender();
-			Bukkit.getServer().dispatchCommand(sender, "eco take "+player+" "+plugin.getEntryCost());
+			Bukkit.getServer().dispatchCommand(sender, "eco take "+player.getName()+" "+plugin.getEntryCost());
 		}
+	}
+	
+	public void removeAllEntries() {
+		
+		entries = new ArrayList<Entry>();
 	}
 }

@@ -136,7 +136,7 @@ public class ClearLagLotto extends JavaPlugin {
 		this.getCommand("clearlaglotto").setExecutor(new Cll(this));
 		this.getCommand("pot").setExecutor(new Pot(this));
 		
-		lotto = new BeginLotto(start_lotto, this);
+		lotto = new BeginLotto(this);
 	}
 	
 	private void registerEvents() {
@@ -165,19 +165,19 @@ public class ClearLagLotto extends JavaPlugin {
 		FileConfiguration config = this.getConfig();
 		
 		// Load strings from config file
-		winning_condition = config.getString("winning-condition", "absolute");
-		entry_confirm = config.getString("entry-confirm", ChatColor.GREEN + "You have entered a guess into the lottery!");
-		entry_no_money = config.getString("entry-no-money", ChatColor.RED + "You do not have enough money.");
-		start_lotto = config.getString("start-lotto", ChatColor.GREEN + "May the guessing begin!" +
-		ChatColor.RED + "Type " + ChatColor.YELLOW + "/bet [amount] " + ChatColor.RED + "to enter in a guess for the number of entities removed!");
-		no_lotto = config.getString("no-lotto", ChatColor.RED + "No lottery is currently in progress.");
-		lotto_win = config.getString("lotto-win", ChatColor.GREEN + "+name has won with a guess of +guess and received $+winnings");
-		lotto_no_win = config.getString("lotto-no-win", ChatColor.RED + "No one won the lottery. How sad :(");
-		lotto_jackpot = config.getString("lotto-jackpot",ChatColor.GREEN + "+name won the " + 
-				ChatColor.YELLOW + "jackpot " + ChatColor.GREEN + "with a guess of +guess and received $+winnings! Congratulations, +name!!");
+		winning_condition = Util.colorMessage(config.getString("winning-condition", "absolute"));
+		entry_confirm = Util.colorMessage(config.getString("entry-confirm", ChatColor.GREEN + "You have entered a guess into the lottery!"));
+		entry_no_money = Util.colorMessage(config.getString("entry-no-money", ChatColor.RED + "You do not have enough money."));
+		start_lotto = Util.colorMessage(config.getString("start-lotto", ChatColor.GREEN + "May the guessing begin!" +
+		ChatColor.LIGHT_PURPLE + "Type " + ChatColor.YELLOW + "/bet [amount] " + ChatColor.LIGHT_PURPLE + "to enter in a guess for the number of entities removed!"));
+		no_lotto = Util.colorMessage(config.getString("no-lotto", ChatColor.RED + "No lottery is currently in progress."));
+		lotto_win = Util.colorMessage(config.getString("lotto-win", ChatColor.GREEN + "%name% has won with a guess of %guess% and received $%winnings%"));
+		lotto_no_win = Util.colorMessage(config.getString("lotto-no-win", ChatColor.RED + "No one won the lottery. How sad :("));
+		lotto_jackpot = Util.colorMessage(config.getString("lotto-jackpot",ChatColor.GREEN + "%name% won the " + 
+				ChatColor.YELLOW + "jackpot " + ChatColor.GREEN + "with a guess of %guess% and received $%winnings%! Congratulations, %name%!!"));
 		
 		// Load doubles from config file
-		activation_chance = config.getDouble("activation-chance", 1.0);
+		activation_chance = config.getDouble("activation-chance", 1);
 		entry_cost = config.getDouble("entry-cost", 100.0);
 		pot_multiplier = config.getDouble("pot-multiplier", 1.0);
 		pot_adder = config.getDouble("pot-adder", 0.0);

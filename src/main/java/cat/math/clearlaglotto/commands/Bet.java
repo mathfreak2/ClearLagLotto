@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import cat.math.clearlaglotto.ClearLagLotto;
 import cat.math.clearlaglotto.Entry;
+import cat.math.clearlaglotto.Util;
 import cat.math.clearlaglotto.events.BeginLotto;
 
 public class Bet implements TabExecutor {
@@ -23,33 +24,30 @@ public class Bet implements TabExecutor {
 	}
 	
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-    	
-    	if(command.getName().equals("bet")) {
 	        
-    		if(!BeginLotto.isRunning) {
-	            sender.sendMessage(clearlaglotto.getNoLottoMessage());
-	            return true;
-	        }
-	
-	        if(!(sender instanceof Player) || !sender.hasPermission("clearlaglotto.bet")) {
-	            sender.sendMessage("There is a lottery currently in progress, but you may not participate!");
-	            return true;
-	        }
-	
-	        OfflinePlayer player = (OfflinePlayer) sender;
-	
-	        if(args.length == 0) return false;
-	        int bet = stringToInt(args[0]);
-	        if(bet < 0) return false;
-	        
-	        Entry entry = new Entry(player, bet);
-	        BeginLotto lotto = clearlaglotto.getLottery();
-	        lotto.addEntry(entry);
-	
+    	if(!BeginLotto.isRunning) {
+	        sender.sendMessage(clearlaglotto.getNoLottoMessage());
 	        return true;
-    	}
-    	
-    	return false;
+	    }
+	
+	    if(!(sender instanceof Player) || !sender.hasPermission("clearlaglotto.bet")) {
+	        sender.sendMessage("There is a lottery currently in progress, but you may not participate!");
+	        return true;
+	    }
+	
+	    OfflinePlayer player = (OfflinePlayer) sender;
+	
+	    if(args.length == 0) return false;
+	    int bet = stringToInt(args[0]);
+	    if(bet < 0) return false;
+	        
+	    Entry entry = new Entry(player, bet);
+	    BeginLotto lotto = clearlaglotto.getLottery();
+	    lotto.addEntry(entry);
+	    
+	    sender.sendMessage(Util.colorMessage(clearlaglotto.getEntryConfirmMessage()));
+	
+	    return true;
     }
 
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {

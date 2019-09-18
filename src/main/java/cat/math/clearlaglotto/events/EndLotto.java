@@ -12,6 +12,7 @@ import com.earth2me.essentials.Essentials;
 
 import cat.math.clearlaglotto.ClearLagLotto;
 import cat.math.clearlaglotto.Entry;
+import cat.math.clearlaglotto.Util;
 
 public class EndLotto extends Event {
 
@@ -26,7 +27,7 @@ public class EndLotto extends Event {
     	
     	Bukkit.getServer().getPluginManager().callEvent(this);
     	BeginLotto.isRunning = false;
-    	String message = plugin.getLottoWinMessage();
+    	String message = Util.colorMessage(plugin.getLottoWinMessage());
     	ArrayList<Entry> entries = plugin.getLottery().getEntryList();
     	String winning_condition = plugin.getWinningCondition();
     	int mindifference = -1;
@@ -54,24 +55,25 @@ public class EndLotto extends Event {
     		}
     	}
     	
-    	if(winner == null) Bukkit.getServer().broadcastMessage(plugin.getLottoNoWinMessage());
+    	if(winner == null) Bukkit.getServer().broadcastMessage(Util.colorMessage(plugin.getLottoNoWinMessage()));
     	else {
     		
     		double winnings = plugin.getLottery().getPot();
     		if(winner.getEntry() == removed) {
     			winnings *= plugin.getJackpotMultiplier();
-    			message = plugin.getLottoJackpotMessage();
+    			message = Util.colorMessage(plugin.getLottoJackpotMessage());
     		}
     		
-    		message.replaceAll("+name",winner.getPlayer().getName());
-    		message.replaceAll("+guess", ""+winner.getEntry());
-    		message.replaceAll("+winnings", ""+winnings);
+    		message = message.replaceAll("%name%",winner.getPlayer().getName());
+    		message = message.replaceAll("%guess%", ""+winner.getEntry());
+    		message = message.replaceAll("%winnings%", ""+winnings);
     		Bukkit.getServer().broadcastMessage(message);
     		
     		Essentials essentials = plugin.getEssentials();
     		CommandSender sender = (CommandSender)Bukkit.getServer().getConsoleSender();
     		Bukkit.getServer().dispatchCommand(sender, "eco give "+winner.getPlayer().getName()+" "+winnings);
     		plugin.getLottery().setPot(0);
+    		plugin.getLottery().removeAllEntries();
     		
     	}
     }

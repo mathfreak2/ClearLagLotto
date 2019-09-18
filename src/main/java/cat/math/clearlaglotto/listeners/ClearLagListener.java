@@ -18,14 +18,17 @@ import me.minebuilders.clearlag.events.EntityRemoveEvent;
 
 public class ClearLagListener implements Listener {
 	
-	ClearLagLotto clearlaglotto;
+	public static ClearLagLotto clearlaglotto;
+	public static boolean onclearlag = false;
 	
 	public ClearLagListener(ClearLagLotto clearlaglotto) {
-		this.clearlaglotto = clearlaglotto;
+		ClearLagListener.clearlaglotto = clearlaglotto;
 	}
 	
 	@EventHandler
 	public void onClearLag(EntityRemoveEvent event) {
+		
+		if(onclearlag) return;
 		
 		int removed = event.getEntityList().size();
 		
@@ -40,7 +43,7 @@ public class ClearLagListener implements Listener {
 		
 		// Determines whether or not there should be a lottery on next lag clearing event
 		if(randomize) {
-			double random = 100*Math.random();
+			double random = Math.random();
 			double activation = clearlaglotto.getActivationChance();
 			if(random < activation) activate_lottery = true;
 		}
@@ -58,7 +61,7 @@ public class ClearLagListener implements Listener {
 		
 		class RunLotto implements Runnable {
 			
-			ClearLagLotto plugin;
+			public ClearLagLotto plugin;
 			
 			public RunLotto(ClearLagLotto plugin) {
 				this.plugin = plugin;
@@ -66,6 +69,7 @@ public class ClearLagListener implements Listener {
 			
 			public void run() {
 				
+				ClearLagListener.onclearlag = false;
 				plugin.getLottery().runEvent();
 			}
 		}
@@ -74,6 +78,7 @@ public class ClearLagListener implements Listener {
 			
 			BukkitScheduler bs = Bukkit.getServer().getScheduler();
 			bs.runTaskLater(clearlaglotto, new RunLotto(clearlaglotto), 20*(interval-seconds));
+			onclearlag = true;
 		}
 	}
 }
