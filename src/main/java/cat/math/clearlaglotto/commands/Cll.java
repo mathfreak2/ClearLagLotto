@@ -17,6 +17,32 @@ public class Cll implements TabExecutor {
 	public Cll(ClearLagLotto plugin) {
 		this.plugin = plugin;
 	}
+
+    String help_config_dialog_1 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Change config values in-game\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "-=-=-=-=-=-=[" + ChatColor.WHITE + "1/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-=-=-=-";
+
+    String help_config_dialog_2 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Change config values in-game\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "-=-=-=-=-=-=[" + ChatColor.WHITE + "2/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-=-=-=-";
+
+    String help_config_dialog_3 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Change config values in-game\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+            ChatColor.LIGHT_PURPLE + "-=-=-=-=-=-=[" + ChatColor.WHITE + "3/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-=-=-=-";
 	
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
@@ -32,6 +58,7 @@ public class Cll implements TabExecutor {
 
                 list.add("Reload");
                 list.add("Config");
+                list.add("Help");
 
                 return list;
 
@@ -207,6 +234,21 @@ public class Cll implements TabExecutor {
 			sender.sendMessage("Config reloaded");
 			return true;
 		}
+
+
+		if(args[0].equalsIgnoreCase("help")){
+
+		    String help_dialog = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-" +
+                    ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Reload" + ChatColor.GRAY + " - Reload Config files\n" +
+                    ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Config" + ChatColor.GRAY + " - Change config values in-game\n" +
+                    ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Config Help" + ChatColor.GRAY + " - Shows options for config\n" +
+                    ChatColor.LIGHT_PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+
+		    sender.sendMessage(help_dialog);
+		    return true;
+        }
+
+
 
 		if(args[0].equalsIgnoreCase("config")) {
 
@@ -400,6 +442,27 @@ public class Cll implements TabExecutor {
             }
 
             if(args.length >= 3) {
+
+
+                if(args[1].equalsIgnoreCase("help")){
+
+
+
+                        if(args[2].equalsIgnoreCase("2")){
+                            sender.sendMessage(this.help_config_dialog_2);
+                            return true;
+                        }
+
+                        if(args[2].equalsIgnoreCase("3")){
+                            sender.sendMessage(this.help_config_dialog_3);
+                            return true;
+                        }
+
+                        sender.sendMessage(this.help_config_dialog_1);
+                        return true;
+
+                }
+
 
                 int count = args.length;
 
