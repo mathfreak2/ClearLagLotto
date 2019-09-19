@@ -87,6 +87,7 @@ public class Cll implements TabExecutor {
                         list.add("lotto-win");
                         list.add("lotto-no-win");
                         list.add("lotto-jackpot");
+                        list.add("Help");
 
                         return list;
                     }
@@ -240,8 +241,7 @@ public class Cll implements TabExecutor {
 		    String help_dialog = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
                     ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Reload" + ChatColor.GRAY + " - Reload Config files\n" +
                     ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Config" + ChatColor.GRAY + " - Change config values in-game\n" +
-                    ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Config Help" + ChatColor.GRAY + " - Shows options for config\n" +
-                    ChatColor.LIGHT_PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+                    ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Config Help" + ChatColor.GRAY + " - Shows options for config\n";
 
 		    sender.sendMessage(help_dialog);
 		    return true;
