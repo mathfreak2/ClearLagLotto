@@ -18,31 +18,30 @@ public class Cll implements TabExecutor {
 		this.plugin = plugin;
 	}
 
-    String help_config_dialog_1 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Change config values in-game\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "-=-=-=-=-=-=[" + ChatColor.WHITE + "1/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-=-=-=-";
+    String help_config_dialog_1 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 1/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Defines how the lotto will be winnable\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Defines if frequency will be random or not\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "zero-activation-warning" + ChatColor.GRAY + " - Option to display warning in case chance is zero\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "activation-chance" + ChatColor.GRAY + " - Chance that the frequency is applied, if randomized\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "iterations-to-activate" + ChatColor.GRAY + " - Defines # of ClearLogs to iterate before opening lotto\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "entry-cost" + ChatColor.GRAY + " - Cost of betting in an open pool\n" +
+            ChatColor.LIGHT_PURPLE + "Type " + ChatColor.WHITE + "/cll Config Help 2"+ChatColor.LIGHT_PURPLE+" to read the next page";
 
-    String help_config_dialog_2 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-" +
+    String help_config_dialog_2 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 2/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Change config values in-game\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "-=-=-=-=-=-=[" + ChatColor.WHITE + "2/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-=-=-=-";
+            ChatColor.LIGHT_PURPLE + "Type " + ChatColor.WHITE + "/cll Config Help 3"+ChatColor.LIGHT_PURPLE+" to read the next page";
 
-    String help_config_dialog_3 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-" +
+    String help_config_dialog_3 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 3/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Change config values in-game\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
             ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "-=-=-=-=-=-=[" + ChatColor.WHITE + "3/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-=-=-=-";
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config";
 	
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
@@ -238,7 +237,7 @@ public class Cll implements TabExecutor {
 
 		if(args[0].equalsIgnoreCase("help")){
 
-		    String help_dialog = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-" +
+		    String help_dialog = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
                     ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Reload" + ChatColor.GRAY + " - Reload Config files\n" +
                     ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Config" + ChatColor.GRAY + " - Change config values in-game\n" +
                     ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll " + ChatColor.LIGHT_PURPLE + "Config Help" + ChatColor.GRAY + " - Shows options for config\n" +
@@ -253,6 +252,25 @@ public class Cll implements TabExecutor {
 		if(args[0].equalsIgnoreCase("config")) {
 
 		    if(args.length == 3) {
+
+                if(args[1].equalsIgnoreCase("help")){
+
+
+                    if(args[2].equalsIgnoreCase("2")){
+                        sender.sendMessage(this.help_config_dialog_2);
+                        return true;
+                    }
+
+                    if(args[2].equalsIgnoreCase("3")){
+                        sender.sendMessage(this.help_config_dialog_3);
+                        return true;
+                    }
+
+                    sender.sendMessage(this.help_config_dialog_1);
+                    return true;
+
+                }
+
 
 
                 switch (args[1].toLowerCase()) {
@@ -441,27 +459,20 @@ public class Cll implements TabExecutor {
 
             }
 
-            if(args.length >= 3) {
 
+		    if(args.length == 2){
 
                 if(args[1].equalsIgnoreCase("help")){
 
 
-
-                        if(args[2].equalsIgnoreCase("2")){
-                            sender.sendMessage(this.help_config_dialog_2);
-                            return true;
-                        }
-
-                        if(args[2].equalsIgnoreCase("3")){
-                            sender.sendMessage(this.help_config_dialog_3);
-                            return true;
-                        }
-
-                        sender.sendMessage(this.help_config_dialog_1);
-                        return true;
+                    sender.sendMessage(this.help_config_dialog_1);
+                    return true;
 
                 }
+            }
+
+
+            if(args.length >= 3) {
 
 
                 int count = args.length;
