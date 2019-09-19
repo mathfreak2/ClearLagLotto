@@ -18,30 +18,30 @@ public class Cll implements TabExecutor {
 		this.plugin = plugin;
 	}
 
-    String help_config_dialog_1 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 1/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Defines how the lotto will be winnable\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Defines if frequency will be random or not\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "zero-activation-warning" + ChatColor.GRAY + " - Option to display warning in case chance is zero\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "activation-chance" + ChatColor.GRAY + " - Chance that the frequency is applied, if randomized\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "iterations-to-activate" + ChatColor.GRAY + " - Defines # of ClearLogs to iterate before opening lotto\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "entry-cost" + ChatColor.GRAY + " - Cost of betting in an open pool\n" +
+    String help_config_dialog_1 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 1"+ChatColor.WHITE+"/" + ChatColor.GREEN+"3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "winning-condition " + ChatColor.GRAY +"absolute"+ChatColor.ITALIC + "\n Defines how the lotto will be winnable\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "randomize-frequency " + ChatColor.GRAY +"true"+ChatColor.ITALIC + "\n Defines if frequency will be random or not\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "zero-activation-warning " + ChatColor.GRAY +"true"+ChatColor.ITALIC + "\n Option to display warning in case chance is zero\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "activation-chance " + ChatColor.GRAY +"1"+ChatColor.ITALIC + "\n Chance that the frequency is applied, if randomized\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "iterations-to-activate " + ChatColor.GRAY +"1"+ChatColor.ITALIC + "\n Defines # of ClearLogs to iterate before opening lotto\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "entry-cost " + ChatColor.GRAY +"100"+ ChatColor.ITALIC +"\n Cost of betting in an open pool\n" +
             ChatColor.LIGHT_PURPLE + "Type " + ChatColor.WHITE + "/cll Config Help 2"+ChatColor.LIGHT_PURPLE+" to read the next page";
 
-    String help_config_dialog_2 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 2/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Change config values in-game\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
+    String help_config_dialog_2 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 2"+ChatColor.WHITE+"/" + ChatColor.GREEN+"3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "entry-confirm " +ChatColor.GRAY +"<message>"+ChatColor.ITALIC + "\n Message shown when you have been added to a lotto\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "entry-no-money " +ChatColor.GRAY +"<message>"+ChatColor.ITALIC + "\n Message when a user doesn't have sufficient funds\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "pot-multiplier " +ChatColor.GRAY +"1"+ChatColor.ITALIC + "\n Multiplier for pot winnings\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "pot-adder " + ChatColor.GRAY +"0"+ChatColor.ITALIC + "\n Amount added to the pot per entry + entry-cost\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "jackpot-multiplier " + ChatColor.GRAY +"3"+ChatColor.ITALIC + "\n Multiplier for jackpot winnings\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "seconds-before-clearlag " + ChatColor.GRAY +"60"+ChatColor.ITALIC + "\n Time prior to a clear lag that the lotto opens\n" +
             ChatColor.LIGHT_PURPLE + "Type " + ChatColor.WHITE + "/cll Config Help 3"+ChatColor.LIGHT_PURPLE+" to read the next page";
 
-    String help_config_dialog_3 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 3/3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "winning-condition" + ChatColor.GRAY + " - Change config values in-game\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config\n" +
-            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config" + ChatColor.LIGHT_PURPLE + "randomize-frequency" + ChatColor.GRAY + " - Shows options for config";
+    String help_config_dialog_3 = ChatColor.LIGHT_PURPLE + "-=-=-=-=["+ ChatColor.WHITE +"ClearLagLotto"+ChatColor.GREEN+" Page 3"+ChatColor.WHITE+"/" + ChatColor.GREEN+"3"+ChatColor.LIGHT_PURPLE+"]=-=-=-=-\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "start-lotto " + ChatColor.GRAY +"<message>"+ChatColor.ITALIC + "\n Message shown at start of Lotto\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "no-lotto " + ChatColor.GRAY +"<message>"+ChatColor.ITALIC + "\n Message shown when bets are placed without a lotto open\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "lotto-win " + ChatColor.GRAY +"<message>"+ChatColor.ITALIC + "\n Message shown when a user wins\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config " + ChatColor.LIGHT_PURPLE + "lotto-no-win " + ChatColor.GRAY +"<message>"+ChatColor.ITALIC + "\n Message shown when no one wins\n" +
+            ChatColor.LIGHT_PURPLE + "/" + ChatColor.WHITE + "cll Config "  + ChatColor.LIGHT_PURPLE + "lotto-jackpot " + ChatColor.GRAY +"<message>"+ChatColor.ITALIC + "\n Message shown at jackpot win";
 	
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
