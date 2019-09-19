@@ -1,17 +1,19 @@
 package cat.math.clearlaglotto.commands;
 
-import cat.math.clearlaglotto.ClearLagLotto;
-import cat.math.clearlaglotto.Entry;
-import cat.math.clearlaglotto.Util;
-import cat.math.clearlaglotto.events.BeginLotto;
+import java.util.List;
+
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
+import cat.math.clearlaglotto.ClearLagLotto;
+import cat.math.clearlaglotto.Entry;
+import cat.math.clearlaglotto.Util;
+import cat.math.clearlaglotto.events.BeginLotto;
 
 public class Bet implements TabExecutor {
 	
@@ -49,16 +51,6 @@ public class Bet implements TabExecutor {
     }
 
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-
-        if(args.length == 1){
-
-            List<String> list = new ArrayList<>();
-            list.add("<Amount>");
-
-            return list;
-
-        }
-
         return null;
     }
 

@@ -1,15 +1,18 @@
 package cat.math.clearlaglotto.events;
 
-import cat.math.clearlaglotto.ClearLagLotto;
-import cat.math.clearlaglotto.Entry;
-import cat.math.clearlaglotto.Util;
-import com.earth2me.essentials.Essentials;
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.Plugin;
 
-import java.util.ArrayList;
+import com.earth2me.essentials.Essentials;
+
+import cat.math.clearlaglotto.ClearLagLotto;
+import cat.math.clearlaglotto.Entry;
+import cat.math.clearlaglotto.Util;
 
 public class EndLotto extends Event {
 
@@ -70,9 +73,10 @@ public class EndLotto extends Event {
     		CommandSender sender = (CommandSender)Bukkit.getServer().getConsoleSender();
     		Bukkit.getServer().dispatchCommand(sender, "eco give "+winner.getPlayer().getName()+" "+winnings);
     		plugin.getLottery().setPot(0);
-    		plugin.getLottery().removeAllEntries();
     		
     	}
+    	
+    	plugin.getLottery().removeAllEntries();
     }
 	
 	@Override

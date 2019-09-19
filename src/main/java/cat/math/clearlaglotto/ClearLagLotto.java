@@ -1,22 +1,30 @@
 package cat.math.clearlaglotto;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import cat.math.clearlaglotto.commands.Bet;
 import cat.math.clearlaglotto.commands.Cll;
 import cat.math.clearlaglotto.commands.Pot;
 import cat.math.clearlaglotto.events.BeginLotto;
 import cat.math.clearlaglotto.listeners.ClearLagListener;
-import com.earth2me.essentials.Essentials;
-import me.minebuilders.clearlag.Clearlag;
-import net.milkbowl.vault.Vault;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
-import java.util.logging.Level;
+import me.minebuilders.clearlag.*;
+import net.milkbowl.vault.*;
+import com.earth2me.essentials.*;
 
 public class ClearLagLotto extends JavaPlugin {
 	

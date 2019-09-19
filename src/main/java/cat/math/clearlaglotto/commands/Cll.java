@@ -53,7 +53,7 @@ public class Cll implements TabExecutor {
 
             if (args.length == 1) {
 
-                List<String> list = new ArrayList<>();
+                List<String> list = new ArrayList<String>();
 
                 list.add("Reload");
                 list.add("Config");
@@ -68,7 +68,7 @@ public class Cll implements TabExecutor {
                 if (args[0].equalsIgnoreCase("config")) {
 
                     if(args.length == 2){
-                        List<String> list = new ArrayList<>();
+                        List<String> list = new ArrayList<String>();
 
                         list.add("winning-condition");
                         list.add("randomize-frequency");
